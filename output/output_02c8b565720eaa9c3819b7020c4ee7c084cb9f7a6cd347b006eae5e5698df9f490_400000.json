@@ -1,0 +1,325 @@
+{
+    "origin_pub": "0355438a4183b37bc523f5759dcfa49a844f828ddf6ce1a05862510f358d91a242", 
+    "origin_alias": "0355438a4183b37bc523", 
+    "routes": [
+        {
+            "route_id": 0, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1424838426740588544", 
+                    "destination_pub": "02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a", 
+                    "destination_alias": "offerm@gmail.com", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1425666359005872128", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }
+            ]
+        }, 
+        {
+            "route_id": 1, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1417398031560933377", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 2, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1425796101368250368", 
+                    "destination_pub": "02f82a1188bb4baa885de6c0d14276db056aa9da768de545c4fc7349379b5670cb", 
+                    "destination_alias": "London-Connect", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425779608695603200", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 3, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1425897256437743616", 
+                    "destination_pub": "029a57fbd0c1d59b789966d038cc92de245ab0f538d22ca904bfe3f30ff8ee05fd", 
+                    "destination_alias": "SLICKERYARD-", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425816992088195072", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 4, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1421435438255964160", 
+                    "destination_pub": "03cc69575c7c22ec4a30a282f28a7e1cd3eb6fbfba9206738b65608092a6a5cb22", 
+                    "destination_alias": "CRYPTONYC", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421451930929790976", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 5, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1423834572626067456", 
+                    "destination_pub": "03a0df42e93655311fee911f857a5cf1c6415f395f6396bb5ac756cbc6f3532601", 
+                    "destination_alias": "DeutscheTestnetBank", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1423834572626984960", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 6, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1424545956648058880", 
+                    "destination_pub": "033a7fadc9139ee671d91425560fc3c0f550249ffe3a215afffd6b6d7b8503e6eb", 
+                    "destination_alias": "WRONGFELONY-11-21-2612-gf083a699", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425897256437809152", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 7, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1423901642831495168", 
+                    "destination_pub": "03ec6c583cd7cadd7c03ecba4042ee4cca35d4f56cae49c2fd7abf71380ba04043", 
+                    "destination_alias": "stat ", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1423900543320195072", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 8, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1424838426740588544", 
+                    "destination_pub": "02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a", 
+                    "destination_alias": "offerm@gmail.com", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1424766958481965056", 
+                    "destination_pub": "023ea0a53af875580899da0ab0a21455d9c19160c4ea1b7774c9d4be6810b02d2c", 
+                    "destination_alias": "btctest.lnetwork.tokyo", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1417390334977638400", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 9, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1424838426740588544", 
+                    "destination_pub": "02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a", 
+                    "destination_alias": "offerm@gmail.com", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1426070979272638465", 
+                    "destination_pub": "02ca22bc12c1c21901c284034d3caad5432f495d440e05a3fc96bfa54e09138d3d", 
+                    "destination_alias": "Sir Lightning", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421491513350946816", 
+                    "destination_pub": "03fd0aebde8713e9c311f22468d3d0524e788b1ef57f4cda41bf5b5a2300fc5cd6", 
+                    "destination_alias": "ruphware++", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425805996975652864", 
+                    "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 
+                    "destination_alias": "02c8b565720eaa9c3819", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": false
+                }
+            ]
+        }
+    ]
+}

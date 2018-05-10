@@ -13,6 +13,9 @@ class Tracer:
         pass
 
     def trace(self, routes, amt, own_pub_key, max_routes):
+        offline_nodes = []
+        no_capacity_nodes = []
+
         for index, route in enumerate(routes):
             if index == max_routes:
                 break
@@ -40,7 +43,10 @@ class Tracer:
                 print 'TO  : %-25s %s' % (node.alias, node.pub_key)
                 print 'AMOUNT: %s' % amount
 
-                result = self.sendPayment(node.pub_key, amount)
+                if node in offline_nodes:
+                    result = "timeout"
+                else:
+                    result = self.sendPayment(node.pub_key, amount)
 
                 color = bcolors.FAIL
                 should_break = True
@@ -51,12 +57,14 @@ class Tracer:
                     channel.state = "NO CHANNEL - DEST NODE OFFLINE"
                     channel.enough_capacity = False
                     node.state = "OFFLINE"
+                    offline_nodes.append(node)
                     route_is_broken = True
 
                 elif "TemporaryChannelFailure" in result:
                     status = "NOT ENOUGH CAPACITY"
                     channel.state = "NOT ENOUGH CAPACITY"
                     node.state = "ONLINE"
+                    no_capacity_nodes.append(node)
                     channel.enough_capacity = False
                     minimal_capacity = True
                     should_break = False
