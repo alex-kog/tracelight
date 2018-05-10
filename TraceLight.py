@@ -2,6 +2,7 @@ import json
 import subprocess
 import sys
 
+from draw_graph import draw
 from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner
 from query_routes_parser import QueryRoutesParser
 
@@ -47,10 +48,10 @@ def populateChannelInfo(route):
             data_file.close()
 
 
-
-
 if __name__ == "__main__":
     routes = queryMainRoute('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490')
     for r in routes:
         populateChannelInfo(r)
         print r
+
+    draw(routes[0].channels)

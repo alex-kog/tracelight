@@ -6,12 +6,12 @@ import networkx as nx
 def draw(channels):
     G = nx.Graph()
 
-    dic_labels = []
+    dic_labels = {}
     for channel in channels:
         G.add_edge(channel.node1_pub, channel.node2_pub)
         dic_labels[(channel.node1_pub, channel.node2_pub)] = \
-            "node: {}, weight: {}\n node: {}, weight: {}".format(channel.node1_pub, channel.weight1, channel.node2_pub,
-                                                                 channel.weight2)
+            "node: {}, weight: {}\n node: {}, weight: {}"\
+                .format(channel.node1_alias, channel.node1_weight, channel.node2_alias, channel.node1_weight)
 
     pos = nx.spring_layout(G)  # positions for all nodes
 
