@@ -37,6 +37,12 @@ class GetChannelInfoRunner:
         return runCommand(args, stdout)
 
 
+class GetNodeInfoRunner:
+    def run(self, channel, stdout=subprocess.PIPE):
+        args = ["lncli", "getnodeinfo", "{}".format(channel)]
+        return runCommand(args, stdout)
+
+
 class QueryRoutesRunner:
     def __init__(self, pubkey):
         self.pubkey = pubkey

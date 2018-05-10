@@ -31,6 +31,8 @@ class Channel:
     def __init__(self):
         self.node1_weight = -1
         self.node2_weight = -1
+        self.node1_alias = ""
+        self.node2_alias = ""
 
     def decode(self, json):
         self.chan_id = json['chan_id']
@@ -41,8 +43,8 @@ class Channel:
         self.capacity = data['capacity']
 
     def __str__(self):
-        return 'id: %s, node1_pub: %s, node2_pub: %s, capacity %s, node1_weight: %s, node2_weight: %s' \
-               % (self.chan_id, self.node1_pub, self.node2_pub, self.capacity, self.node1_weight, self.node2_weight)
+        return 'id: %s, node1_pub: %s, node2_pub: %s, capacity %s, node1_weight: %s, node2_weight: %s, node1_alias: %s, node2_alias: %s' \
+               % (self.chan_id, self.node1_pub, self.node2_pub, self.capacity, self.node1_weight, self.node2_weight, self.node1_alias, self.node2_alias)
 
 
 class QueryRoutesParser:

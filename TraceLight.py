@@ -2,7 +2,7 @@ import json
 import subprocess
 import sys
 
-from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner
+from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner
 from query_routes_parser import QueryRoutesParser
 
 
@@ -16,15 +16,37 @@ def queryMainRoute(pubkey):
 
 
 def populateChannelInfo(route):
-    runner = GetChannelInfoRunner()
+    channelInfoRunner = GetChannelInfoRunner()
+    nodeInfoRunner = GetNodeInfoRunner()
     for channel in route.channels:
         with open('temp_channel_info.json', "w") as outfile:
-            runner.run(channel.chan_id, outfile)
+            channelInfoRunner.run(channel.chan_id, outfile)
             outfile.close()
 
         with open('temp_channel_info.json') as data_file:
             data = json.load(data_file)
             channel.populateChannelInfo(data)
+            data_file.close()
+
+        with open('temp_node_info.json', "w") as outfile:
+            nodeInfoRunner.run(channel.node1_pub, outfile)
+            outfile.close()
+
+        with open('temp_node_info.json') as data_file:
+            data = json.load(data_file)
+            channel.node1_alias = data['node']['alias']
+            data_file.close()
+
+        with open('temp_node_info.json', "w") as outfile:
+            nodeInfoRunner.run(channel.node2_pub, outfile)
+            outfile.close()
+
+        with open('temp_node_info.json') as data_file:
+            data = json.load(data_file)
+            channel.node2_alias = data['node']['alias']
+            data_file.close()
+
+
 
 
 if __name__ == "__main__":
