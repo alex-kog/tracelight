@@ -19,6 +19,35 @@ class Route:
             hops.append(h)
         return hops
 
+    def populateChannelInfo(self, channelInfoRunner, nodeInfoRunner):
+        for channel in self.channels:
+            with open('temp_channel_info.json', "w") as outfile:
+                channelInfoRunner.run(channel.chan_id, outfile)
+                outfile.close()
+
+            with open('temp_channel_info.json') as data_file:
+                data = json.load(data_file)
+                channel.populateChannelInfo(data)
+                data_file.close()
+
+            with open('temp_node_info.json', "w") as outfile:
+                nodeInfoRunner.run(channel.node1_pub, outfile)
+                outfile.close()
+
+            with open('temp_node_info.json') as data_file:
+                data = json.load(data_file)
+                channel.node1_alias = data['node']['alias']
+                data_file.close()
+
+            with open('temp_node_info.json', "w") as outfile:
+                nodeInfoRunner.run(channel.node2_pub, outfile)
+                outfile.close()
+
+            with open('temp_node_info.json') as data_file:
+                data = json.load(data_file)
+                channel.node2_alias = data['node']['alias']
+                data_file.close()
+
     def __str__(self):
         s = '\n**Route**\nHops: %s\n' % (len(self.channels))
         s += '  Channels'
@@ -62,6 +91,9 @@ class QueryRoutesParser:
             routes.append(r)
 
         return routes
+
+
+
 
 
 
