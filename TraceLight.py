@@ -1,3 +1,4 @@
+import argparse
 import json
 
 import collections
@@ -175,7 +176,14 @@ class TraceLight:
 
 
 if __name__ == "__main__":
-    offer = '02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a'
-    tamar = '02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490'
-    dest = tamar
-    TraceLight().run(dest, 1, 'output.json', 5)
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('-d', help='destination public key', dest='destination', default="")
+    parser.add_argument('-a', help='amount', dest='amount', default="")
+    parser.add_argument('-o', help='output', dest='output', default="output.json")
+    args = parser.parse_args()
+
+    dest = args.destination
+    amount = args.amount
+    output = args.output
+
+    TraceLight().run(dest, amount, output)
