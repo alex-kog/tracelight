@@ -55,11 +55,12 @@ class Tracer:
                     node.state = "ONLINE"
                     color = bcolors.OKGREEN
                     should_break = False
+                    result = ""
                 else:
                     result_status = "FUCK"
 
-                print 'RESULT: %s%s%s (%s)\n' % \
-                      (color, result_status, bcolors.ENDC, result)
+                print 'RESULT: %s%s%s %s\n' % \
+                      (color, result_status, bcolors.ENDC, "" if result == "" else '(%s)' % result)
 
                 if should_break:
                     break
