@@ -1,10 +1,6 @@
-import json
-import subprocess
-import sys
-
-from draw_graph import draw
 from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner
 from query_routes_parser import QueryRoutesParser
+from routes_filter import RoutesFilter
 
 
 def fetchRoutes(queryRoutesRunner, queryRouteParser, channelInfoRunner, nodeInfoRunner):
@@ -24,8 +20,12 @@ if __name__ == "__main__":
     queryRouteParser = QueryRoutesParser()
     channelInfoRunner = GetChannelInfoRunner()
     nodeInfoRunner = GetNodeInfoRunner()
+    routesFilter = RoutesFilter()
 
     routes = fetchRoutes(queryRoutesRunner, queryRouteParser, channelInfoRunner, nodeInfoRunner)
+    routesFilter.filter(routesFilter, queryRoutesRunner)
+
+
 
     for r in routes:
         print r
