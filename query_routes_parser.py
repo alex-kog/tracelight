@@ -46,6 +46,5 @@ class QueryRoutesParser:
             r = Route()
             r.decode(route)
             routes.append(r)
-            print r
 
         return routes

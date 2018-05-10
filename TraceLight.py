@@ -1,13 +1,17 @@
+import json
 import subprocess
 import sys
+
+from query_routes_parser import QueryRoutesParser
+
 
 def getchannelinfo(channel):
     args = ["lncli", "getchaninfo", "{}".format(channel)]
     return runCommand(args)
 
-def queryroutes(pub):
-    args = ["lncli", "queryroutes", "{}".format(pub), "1"]
-    return runCommand(args)
+def queryroutes(stdout, pub, amount):
+    args = ["lncli", "queryroutes", "{}".format(pub), "{}".format(amount)]
+    return runCommand(args, stdout)
 
 
 def sendPayment(pub, amt):
@@ -19,12 +23,12 @@ def sendPayment(pub, amt):
     return runCommand(args)
 
 
-def runCommand(args):
+def runCommand(args, stdout = subprocess.PIPE):
     exitOnError = True
     printError = True
     shell = False
     try:
-        process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)
+        process = subprocess.Popen(args, stdout=stdout, stderr=subprocess.PIPE, shell=shell)
         out, err = process.communicate()
         if (err):
             if (printError == True):
@@ -32,7 +36,7 @@ def runCommand(args):
             if (exitOnError == True and "Note" not in err):
                 exit(1)
 
-        return out.strip(), err
+        return out, err
     except OSError as e:
         print "Exception: " + str(e)
         print e.filename
@@ -40,7 +44,15 @@ def runCommand(args):
 
 
 if __name__ == "__main__":
-    #testing
-    print sendPayment("02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 1)
-    print queryroutes("02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490")
-    print getchannelinfo("1425805996972179456")
+    # #testing
+    # print sendPayment("02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 1)
+    # print getchannelinfo("1425805996972179456")
+
+    with open('queryroutes.json', "w") as outfile:
+        queryroutes(outfile, "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490", 1)
+        outfile.close()
+    queryRouteParser = QueryRoutesParser()
+    routes = queryRouteParser.parse('queryroutes.json')
+
+    for r in routes:
+        print r
