@@ -79,7 +79,7 @@ class Channel:
         self.capacity = -1
         self.chan_id = -1
         self.state = "UNKNOWN"
-        self.enough_capacity = True
+        self.enough_capacity = False
 
     def decode(self, json):
         self.chan_id = json['chan_id']
