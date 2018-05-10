@@ -17,7 +17,7 @@ class Tracer:
             ordered_route_nodes = list(route.nodes(own_pub_key))[1:]
             ordered_channels = route.channels
 
-            for node in ordered_route_nodes:
+            for index, node in enumerate(ordered_route_nodes):
                 if node.state == "DEAD":
                     route_is_broken = True
                     continue
@@ -26,6 +26,7 @@ class Tracer:
                     route.state = "UNREACHABLE"
                     break
 
+                channel = ordered_channels[index]
                 amount = 1 if minimal_capacity else amt
 
                 print '%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC)
@@ -47,6 +48,7 @@ class Tracer:
                 elif "TemporaryChannelFailure" in result:
                     result_status = "NOT ENOUGH CAPACITY"
                     node.state = "DEAD"
+                    channel.state = "NOT ENOUGH CAPACITY"
                     minimal_capacity = True
                     should_break = False
 

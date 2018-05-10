@@ -78,6 +78,7 @@ class Channel:
         self.node2 = Node()
         self.capacity = -1
         self.chan_id = -1
+        self.state = "UNKNOWN"
 
     def decode(self, json):
         self.chan_id = json['chan_id']
