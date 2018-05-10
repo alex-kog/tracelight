@@ -24,7 +24,7 @@ class Tracer:
             ordered_channels = route.channels
 
             for index, node in enumerate(ordered_route_nodes):
-                if node.state == "DEAD":
+                if node.state == "OFFLINE":
                     route_is_broken = True
                     continue
 
