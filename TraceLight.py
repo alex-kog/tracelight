@@ -1,52 +1,111 @@
-from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner, SendPaymentRunner
+import json
+
+from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner, SendPaymentRunner, GetInfoRunner, \
+    bcolors
 from query_routes_parser import QueryRoutesParser
-from routes_filter import RoutesFilter
+
 
 class Tracer:
-    def __init__(self, sendPayment):
-        self.sendPayment = sendPayment
+    def __init__(self):
+        pass
 
-    # def trace(self, routes, value):
-    #     for route in routes:
-    #         route_is_broken = False
-    #         minimal_capacity = False
-    #         for index, channel in enumerate(route.channels):
-    #             if route_is_broken:
-    #                 route.state = "UNREACHABLE"
-    #                 break
-    #             amount = 1 if minimal_capacity else value
-    #
-    #             with open('temp_sendPayment.json', "w") as outfile:
-    #                 self.sendPayment.run(amount, outfile)
-    #                 outfile.close()
+    def trace(self, routes, amt, own_pub_key):
+        for index, route in enumerate(routes):
+            print '%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE , index, bcolors.ENDC)
+            route_is_broken = False
+            minimal_capacity = False
+            ordered_route_nodes = list(route.nodes(own_pub_key))[1:]
 
+            for node in ordered_route_nodes:
+                if node.state == "DEAD":
+                    route_is_broken = True
+                    continue
 
+                print '*** TESTING ***'
+                print 'FROM: %-25s %s' % ("YOU", own_pub_key)
+                print 'TO  : %-25s %s' % (node.alias, node.pub_key)
 
+                if route_is_broken:
+                    route.state = "UNREACHABLE"
+                    break
+
+                amount = 1 if minimal_capacity else amt
+
+                print 'AMOUNT: %s' % amount
+
+                result = self.sendPayment(node.pub_key, amount)
+
+                if 'timeout' in result or 'UnknownNextPeer' in result:
+                    result = "NODE IS OFFLINE"
+                    route_is_broken = True
+
+                elif "TemporaryChannelFailure" in result:
+                    node.state = "DEAD"
+                    minimal_capacity = True
+                    result = "NOT ENOUGH CAPACITY"
+
+                elif "UnknownPaymentHash" in result:  # This means money went through
+                    node.state = "ONLINE"
+                    result = "SUCCESS"
+
+                else:
+                    result = "FUCK"
+
+                print 'RESULT: %s' % result
+                print '*********************************\n'
+
+                if result is not "SUCCESS":
+                    break
+
+    def sendPayment(self, pubkey, amount):
+        with open('temp_sendPayment.json', "w") as outfile:
+            SendPaymentRunner().run(pubkey, amount, outfile)
+            outfile.close()
+
+        return self.parsePaymentResult('temp_sendPayment.json')
+
+    def parsePaymentResult(self, filename):
+        result = ""
+        with open(filename) as data_file:
+            data = json.load(data_file)
+            # print data
+            result = data['payment_error']
+            data_file.close()
+        return result
 
 
 class TraceLight:
     def __init__(self):
-        self.queryRoutes = QueryRoutesRunner("02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490")
-        self.sendPayment = SendPaymentRunner()
-        self.routeParser = QueryRoutesParser()
-        self.getChannelInfo = GetChannelInfoRunner()
-        self.getNodeInfo = GetNodeInfoRunner()
-        self.filterRoutes = RoutesFilter()
+        pass
 
-    def run(self):
-        self.fetchQueryRoutes(self.queryRoutes)
-        routes = self.fetchRoutes(self.routeParser, self.getChannelInfo, self.getNodeInfo)
-        routes = self.filterRoutes.filter(routes, self.queryRoutes, self.sendPayment)
+    def run(self, dest, amt):
+        own_pub_key = self.fetchOwnPubKey()
+        self.fetchQueryRoutes(dest)
+        routes = self.fetchRoutes()
 
-        for r in routes:
-            print r
+        Tracer().trace(routes, amt, own_pub_key)
 
-    def fetchQueryRoutes(self, queryRoutes):
-        with open('temp_queryroutes.json', "w") as outfile:
-            queryRoutes.run(1, outfile)
+    def fetchOwnPubKey(self):
+        with open('temp_getinfo.json', "w") as outfile:
+            GetInfoRunner().run(outfile)
             outfile.close()
 
-    def fetchRoutes(self, routeParser, getChannelInfo, getNodeInfo):
+        data = {}
+        with open('temp_getinfo.json') as data_file:
+            data = json.load(data_file)
+            data_file.close()
+
+        return data['identity_pubkey']
+
+    def fetchQueryRoutes(self, dest):
+        with open('temp_queryroutes.json', "w") as outfile:
+            QueryRoutesRunner().run(dest, 1, outfile)
+            outfile.close()
+
+    def fetchRoutes(self):
+        routeParser = QueryRoutesParser()
+        getChannelInfo = GetChannelInfoRunner()
+        getNodeInfo = GetNodeInfoRunner()
         routes = routeParser.parse('temp_queryroutes.json')
         for r in routes:
             r.populateChannelInfo(getChannelInfo, getNodeInfo)
@@ -55,4 +114,4 @@ class TraceLight:
 
 
 if __name__ == "__main__":
-    TraceLight().run()
+    TraceLight().run('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490', 1000)

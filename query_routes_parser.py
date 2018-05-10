@@ -1,5 +1,7 @@
 import json
 
+from gyp.common import OrderedSet
+
 
 class Route:
     def __init__(self):
@@ -50,12 +52,17 @@ class Route:
                 channel.node2.alias = data['node']['alias']
                 data_file.close()
 
-    def nodes(self):
-        nodes = []
+    def nodes(self, own_pub_key):
+        nodes = OrderedSet([])
         for channel in self.channels:
-            nodes.append(channel.node1)
-            nodes.append(channel.node2)
-        return list(set(nodes))
+            if (channel.node2.pub_key == own_pub_key):
+                nodes.add(channel.node2)
+                nodes.add(channel.node1)
+            else:
+                nodes.add(channel.node1)
+                nodes.add(channel.node2)
+
+        return nodes
 
     def __str__(self):
         s = '\n**Route**\nHops: %s\n' % (len(self.channels))
@@ -90,10 +97,17 @@ class Node:
         self.weight = -1
         self.alias = ""
         self.pub_key = ""
+        self.state = "UNKNOWN"
 
     def __str__(self):
-        return 'alias: %s, pub_key %s, weight: %s ' \
+        return 'alias: %-40s pub_key %-70s weight: %s ' \
                % (self.alias,  self.pub_key, self.weight)
+
+    def __eq__(self, other):
+        return self.pub_key == other.pub_key
+
+    def __hash__(self):
+        return hash(('pub_key', self.pub_key))
 
 
 class QueryRoutesParser:

@@ -1,5 +1,14 @@
 import subprocess
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def runCommand(args, stdout=subprocess.PIPE):
     exitOnError = True
@@ -19,6 +28,15 @@ def runCommand(args, stdout=subprocess.PIPE):
         print "Exception: " + str(e)
         print e.filename
         raise
+
+
+class GetInfoRunner:
+    def __init__(self):
+        pass
+
+    def run(self, stdout=subprocess.PIPE):
+        args = ["lncli", "getinfo"]
+        return runCommand(args, stdout)
 
 
 class SendPaymentRunner:
@@ -54,9 +72,9 @@ class GetNodeInfoRunner:
 
 
 class QueryRoutesRunner:
-    def __init__(self, pubkey):
-        self.pubkey = pubkey
+    def __init__(self, ):
+        pass
 
-    def run(self, amount, stdout=subprocess.PIPE):
-        args = ["lncli", "queryroutes", "{}".format(self.pubkey), "{}".format(amount)]
+    def run(self, pubkey, amount, stdout=subprocess.PIPE):
+        args = ["lncli", "queryroutes", "{}".format(pubkey), "{}".format(amount)]
         return runCommand(args, stdout)
