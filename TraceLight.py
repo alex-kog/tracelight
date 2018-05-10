@@ -186,4 +186,4 @@ if __name__ == "__main__":
     amount = args.amount
     output = args.output
 
-    TraceLight().run(dest, amount, output)
+    TraceLight().run(dest, amount, 'output/%s' % output)
