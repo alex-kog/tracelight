@@ -7,11 +7,11 @@ from query_routes_parser import QueryRoutesParser
 
 
 def queryMainRoute(pubkey):
-    with open('queryroutes.json', "w") as outfile:
+    with open('temp_queryroutes.json', "w") as outfile:
         QueryRoutesRunner(pubkey).run(1, outfile)
         outfile.close()
     queryRouteParser = QueryRoutesParser()
-    routes = queryRouteParser.parse('queryroutes.json')
+    routes = queryRouteParser.parse('temp_queryroutes.json')
     return routes
 
 
