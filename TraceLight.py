@@ -11,19 +11,16 @@ class Tracer:
 
     def trace(self, routes, amt, own_pub_key):
         for index, route in enumerate(routes):
-            print '%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE , index, bcolors.ENDC)
+            print '%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE, index, bcolors.ENDC)
             route_is_broken = False
             minimal_capacity = False
             ordered_route_nodes = list(route.nodes(own_pub_key))[1:]
+            ordered_channels = route.channels
 
             for node in ordered_route_nodes:
                 if node.state == "DEAD":
                     route_is_broken = True
                     continue
-
-                print '%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC)
-                print 'FROM: %-25s %s' % ("YOU", own_pub_key)
-                print 'TO  : %-25s %s' % (node.alias, node.pub_key)
 
                 if route_is_broken:
                     route.state = "UNREACHABLE"
@@ -31,31 +28,40 @@ class Tracer:
 
                 amount = 1 if minimal_capacity else amt
 
+                print '%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC)
+                print 'FROM: %-25s %s' % ("YOU", own_pub_key)
+                print 'TO  : %-25s %s' % (node.alias, node.pub_key)
                 print 'AMOUNT: %s' % amount
 
                 result = self.sendPayment(node.pub_key, amount)
 
                 color = bcolors.FAIL
-                if 'timeout' in result or 'UnknownNextPeer' in result:
-                    result = "NODE IS OFFLINE"
+                should_break = True
+                result_status = ""
+                if 'timeout' in result or \
+                                'UnknownNextPeer' in result or \
+                                'unable to find a path' in result:
+                    result_status = "NODE IS OFFLINE"
                     route_is_broken = True
 
                 elif "TemporaryChannelFailure" in result:
+                    result_status = "NOT ENOUGH CAPACITY"
                     node.state = "DEAD"
                     minimal_capacity = True
-                    result = "NOT ENOUGH CAPACITY"
+                    should_break = False
 
                 elif "UnknownPaymentHash" in result:  # This means money went through
+                    result_status = "SUCCESS" if amount == amt else "LIVE"
                     node.state = "ONLINE"
-                    result = "SUCCESS"
                     color = bcolors.OKGREEN
+                    should_break = False
                 else:
-                    result = "FUCK"
+                    result_status = "FUCK"
 
-                print 'RESULT: %s%s%s' % (color, result, bcolors.ENDC)
-                print '\n'
+                print 'RESULT: %s%s%s (%s)\n' % \
+                      (color, result_status, bcolors.ENDC, result)
 
-                if result is not "SUCCESS":
+                if should_break:
                     break
 
     def sendPayment(self, pubkey, amount):
@@ -115,4 +121,4 @@ class TraceLight:
 
 
 if __name__ == "__main__":
-    TraceLight().run('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490', 1000)
+    TraceLight().run('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490', 1000000)
