@@ -53,7 +53,7 @@ class Tracer:
                     result = "FUCK"
 
                 print 'RESULT: %s%s%s' % (color, result, bcolors.ENDC)
-                print '*********************************\n'
+                print '\n'
 
                 if result is not "SUCCESS":
                     break
