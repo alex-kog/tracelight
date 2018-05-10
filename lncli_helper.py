@@ -21,11 +21,6 @@ def runCommand(args, stdout=subprocess.PIPE):
         raise
 
 
-def getchannelinfo(channel):
-    args = ["lncli", "getchaninfo", "{}".format(channel)]
-    return runCommand(args)
-
-
 def sendPayment(pub, amt):
     args = ["lncli", "sendpayment",
             "--dest", "{}".format(pub),
@@ -34,6 +29,12 @@ def sendPayment(pub, amt):
             "--payment_hash", "f4765e0acbee6687e19292204d2aaa72d3f10642253144a292ab66613c123456"]
 
     return runCommand(args)
+
+
+class GetChannelInfoRunner:
+    def run(self, channel, stdout=subprocess.PIPE):
+        args = ["lncli", "getchaninfo", "{}".format(channel)]
+        return runCommand(args, stdout)
 
 
 class QueryRoutesRunner:
