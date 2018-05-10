@@ -1,5 +1,7 @@
 import json
 
+import collections
+
 from lncli_helper import QueryRoutesRunner, GetChannelInfoRunner, GetNodeInfoRunner, SendPaymentRunner, GetInfoRunner, \
     bcolors
 from query_routes_parser import QueryRoutesParser
@@ -9,8 +11,11 @@ class Tracer:
     def __init__(self):
         pass
 
-    def trace(self, routes, amt, own_pub_key):
+    def trace(self, routes, amt, own_pub_key, max_routes):
         for index, route in enumerate(routes):
+            if index == max_routes:
+                break
+
             print '%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE, index, bcolors.ENDC)
             route_is_broken = False
             minimal_capacity = False
@@ -38,31 +43,36 @@ class Tracer:
 
                 color = bcolors.FAIL
                 should_break = True
-                result_status = ""
                 if 'timeout' in result or \
                                 'UnknownNextPeer' in result or \
                                 'unable to find a path' in result:
-                    result_status = "NODE IS OFFLINE"
+                    status = "NODE IS OFFLINE"
+                    channel.state = "NO CHANNEL - DEST NODE OFFLINE"
+                    channel.enough_capacity = False
+                    node.state = "OFFLINE"
                     route_is_broken = True
 
                 elif "TemporaryChannelFailure" in result:
-                    result_status = "NOT ENOUGH CAPACITY"
-                    node.state = "DEAD"
+                    status = "NOT ENOUGH CAPACITY"
                     channel.state = "NOT ENOUGH CAPACITY"
+                    node.state = "ONLINE"
+                    channel.enough_capacity = False
                     minimal_capacity = True
                     should_break = False
 
                 elif "UnknownPaymentHash" in result:  # This means money went through
-                    result_status = "SUCCESS" if amount == amt else "LIVE"
+                    status = "SUCCESS" if amount == amt else "LIVE"
+                    channel.state = "ACTIVE" if amount == amt else "NOT ENOUGH CAPACITY"
+                    channel.enough_capacity = True if amount == amt else False
                     node.state = "ONLINE"
                     color = bcolors.OKGREEN
                     should_break = False
                     result = ""
                 else:
-                    result_status = "FUCK"
+                    status = "FUCK"
 
                 print 'RESULT: %s%s%s %s\n' % \
-                      (color, result_status, bcolors.ENDC, "" if result == "" else '(%s)' % result)
+                      (color, status, bcolors.ENDC, "" if result == "" else '(%s)' % result)
 
                 if should_break:
                     break
@@ -75,7 +85,6 @@ class Tracer:
         return self.parsePaymentResult('temp_sendPayment.json')
 
     def parsePaymentResult(self, filename):
-        result = ""
         with open(filename) as data_file:
             data = json.load(data_file)
             # print data
@@ -83,24 +92,65 @@ class Tracer:
             data_file.close()
         return result
 
+class TraceOutput:
+    def __init__(self, routes, amt, own_pub_key):
+        self.routes = routes
+        self.amount = amt
+        self.own_pub_key = own_pub_key
+
+    def outputToFile(self, filename):
+        output = []
+        for index, route in enumerate(self.routes):
+            ordered_route_nodes = list(route.nodes(self.own_pub_key))[1:]
+            ordered_channels = route.channels
+
+            route_data = collections.OrderedDict()
+            dest = list(route.nodes(self.own_pub_key))[-1]
+            route_data['route_id'] = index
+            route_data['origin_pub'] = self.own_pub_key
+            route_data['route_is_broken'] = True if route.state == "UNREACHABLE" else False
+
+            hops = []
+            for index, node in enumerate(ordered_route_nodes):
+                channel = ordered_channels[index]
+                hop = collections.OrderedDict()
+
+                hop['chan_id'] = channel.chan_id
+                hop['destination_pub'] = node.pub_key
+                hop['destination_status'] = node.state
+                hop['enough_capacity'] = channel.enough_capacity
+                hops.append(hop)
+
+            route_data['hops'] = hops
+
+            output.append(route_data)
+
+        output_routes = {}
+        output_routes['routes'] = output
+
+        with open(filename, 'w') as outfile:
+            s = json.dumps(output_routes, indent=4)
+            outfile.write(s)
+
+
 
 class TraceLight:
     def __init__(self):
         pass
 
-    def run(self, dest, amt):
+    def run(self, dest, amt, output_filename, max_routes = 100):
         own_pub_key = self.fetchOwnPubKey()
         self.fetchQueryRoutes(dest)
         routes = self.fetchRoutes()
 
-        Tracer().trace(routes, amt, own_pub_key)
+        Tracer().trace(routes, amt, own_pub_key, max_routes)
+        TraceOutput(routes, amt, own_pub_key).outputToFile(output_filename)
 
     def fetchOwnPubKey(self):
         with open('temp_getinfo.json', "w") as outfile:
             GetInfoRunner().run(outfile)
             outfile.close()
 
-        data = {}
         with open('temp_getinfo.json') as data_file:
             data = json.load(data_file)
             data_file.close()
@@ -124,4 +174,7 @@ class TraceLight:
 
 
 if __name__ == "__main__":
-    TraceLight().run('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490', 1000000)
+    TraceLight().run('02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490',
+                     1000000,
+                     'output.json',
+                     5)
