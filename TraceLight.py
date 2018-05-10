@@ -10,6 +10,7 @@ from query_routes_parser import QueryRoutesParser
 
 class Tracer:
     def __init__(self):
+        self.payment_cache = {}
         pass
 
     def trace(self, routes, amt, own_pub_key, max_routes):
@@ -87,11 +88,16 @@ class Tracer:
                     break
 
     def sendPayment(self, pubkey, amount):
+        if (pubkey, amount) in self.payment_cache.keys():
+            return self.payment_cache[(pubkey, amount)]
+
         with open('temp_sendPayment.json', "w") as outfile:
             SendPaymentRunner().run(pubkey, amount, outfile)
             outfile.close()
 
-        return self.parsePaymentResult('temp_sendPayment.json')
+        result = self.parsePaymentResult('temp_sendPayment.json')
+        self.payment_cache[(pubkey, amount)] = result
+        return result
 
     def parsePaymentResult(self, filename):
         with open(filename) as data_file:
