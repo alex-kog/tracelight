@@ -93,12 +93,6 @@ class Channel:
         return 'id: %s, capacity %s, node1: %s, node2: %s ' \
                % (self.chan_id,  self.capacity, self.node1, self.node2)
 
-    def getDestNode(self, own_pub_key):
-        #TODO this is a hack
-        if self.node2.pub_key == own_pub_key:
-            return self.node1
-        else:
-            return self.node2
 
 class Node:
     def __init__(self):
