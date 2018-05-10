@@ -1,0 +1,61 @@
+{
+            "origin_pub":"02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a",
+          "origin_alias": "offerm@gmail.com",
+  "routes": [
+    {
+          "route_id": "1",
+             "route_is_broken": "FALSE",
+              "hops": [
+            {
+              "chan_id": "1425666359005872128",
+              "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490",
+		          "destination_status": "online",
+              "enough_capacity": "true",
+              "alias": "Alex"
+              },
+              {
+              "chan_id": "1425666359005872345",
+              "destination_pub": "333365720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f242",
+		          "destination_status": "online",
+              "enough_capacity": "false",
+                    "alias": "yakir"
+              },
+              {
+              "chan_id": "1425666359005872345",
+              "destination_pub": "333365720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f242",
+		          "destination_status": "offline",
+              "enough_capacity": "false",
+                    "alias": "Zumba"
+              },
+              {
+              "chan_id": "1425666359005872345",
+              "destination_pub": "333365720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f242",
+		          "destination_status": "unreachable",
+              "enough_capacity": "false",
+                    "alias": "Bankok"
+              }
+          ]
+    },
+        {
+          "route_id": "2",
+             "route_is_broken": "FALSE",
+            "hops": [
+            {
+              "chan_id": "1425666359005872128",
+              "destination_pub": "02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490",
+		          "destination_status": "online",
+              "enough_capacity": "true",
+                    "alias": "Tamar"
+              },
+              {
+              "chan_id": "1425666359005872345",
+              "destination_pub": "333365720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f242",
+		          "destination_status": "online",
+              "enough_capacity": "false",
+                    "alias": "YOTA"
+              }
+          ]
+    }
+
+        ]
+}
