@@ -22,12 +22,12 @@ def runCommand(args, stdout=subprocess.PIPE):
 
 
 class SendPaymentRunner:
-    def __init__(self, pubkey):
-        self.pubkey = pubkey
+    def __init__(self):
+        pass
 
-    def run(self, amt, stdout=subprocess.PIPE):
+    def run(self, pubkey, amt, stdout=subprocess.PIPE):
         args = ["lncli", "sendpayment",
-                "--dest", "{}".format(self.pubkey),
+                "--dest", "{}".format(pubkey),
                 "--amt", "{}".format(amt),
                 "--final_cltv_delta", "{}".format(144),
                 "--payment_hash", "f4765e0acbee6687e19292204d2aaa72d3f10642253144a292ab66613c123456"]

@@ -2,6 +2,12 @@ import json
 
 
 class Route:
+    def __init__(self):
+        self.total_amt = -1
+        self.total_fees = -1
+        self.channels = []
+        self.state = "UNKNOWN"
+
     def decode(self, json):
         self.total_amt = json['total_amt']
         self.total_fees = json['total_fees']
@@ -27,22 +33,29 @@ class Route:
                 data_file.close()
 
             with open('temp_node_info.json', "w") as outfile:
-                nodeInfoRunner.run(channel.node1_pub, outfile)
+                nodeInfoRunner.run(channel.node1.pub_key, outfile)
                 outfile.close()
 
             with open('temp_node_info.json') as data_file:
                 data = json.load(data_file)
-                channel.node1_alias = data['node']['alias']
+                channel.node1.alias = data['node']['alias']
                 data_file.close()
 
             with open('temp_node_info.json', "w") as outfile:
-                nodeInfoRunner.run(channel.node2_pub, outfile)
+                nodeInfoRunner.run(channel.node2.pub_key, outfile)
                 outfile.close()
 
             with open('temp_node_info.json') as data_file:
                 data = json.load(data_file)
-                channel.node2_alias = data['node']['alias']
+                channel.node2.alias = data['node']['alias']
                 data_file.close()
+
+    def nodes(self):
+        nodes = []
+        for channel in self.channels:
+            nodes.append(channel.node1)
+            nodes.append(channel.node2)
+        return list(set(nodes))
 
     def __str__(self):
         s = '\n**Route**\nHops: %s\n' % (len(self.channels))
@@ -54,22 +67,33 @@ class Route:
 
 class Channel:
     def __init__(self):
-        self.node1_weight = -1
-        self.node2_weight = -1
-        self.node1_alias = ""
-        self.node2_alias = ""
+        self.node1 = Node()
+        self.node2 = Node()
+        self.capacity = -1
+        self.chan_id = -1
 
     def decode(self, json):
         self.chan_id = json['chan_id']
 
     def populateChannelInfo(self, data):
-        self.node1_pub = data['node1_pub']
-        self.node2_pub = data['node2_pub']
+        self.node1.pub_key = data['node1_pub']
+        self.node2.pub_key = data['node2_pub']
         self.capacity = data['capacity']
 
     def __str__(self):
-        return 'id: %s, node1_pub: %s, node2_pub: %s, capacity %s, node1_weight: %s, node2_weight: %s, node1_alias: %s, node2_alias: %s' \
-               % (self.chan_id, self.node1_pub, self.node2_pub, self.capacity, self.node1_weight, self.node2_weight, self.node1_alias, self.node2_alias)
+        return 'id: %s, capacity %s, node1: %s, node2: %s ' \
+               % (self.chan_id,  self.capacity, self.node1, self.node2)
+
+
+class Node:
+    def __init__(self):
+        self.weight = -1
+        self.alias = ""
+        self.pub_key = ""
+
+    def __str__(self):
+        return 'alias: %s, pub_key %s, weight: %s ' \
+               % (self.alias,  self.pub_key, self.weight)
 
 
 class QueryRoutesParser:
