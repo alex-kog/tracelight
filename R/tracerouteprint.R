@@ -16,16 +16,16 @@ new_line<-function(){
 }
 for (route in routes){
   sleep=1
-  cat("Start checking route #",route$route_id,fill=T)
+  cat("Start checking route #",route$route_id,"via", length(route$hops),"hops",fill=T)
   Sys.sleep(sleep)
   from=output$origin_alias
   for (hop in route$hops){
     cat(paste("\thop:",hop$chan_id, "from",from, "to",hop$alias))
     three_dots(sleep=sleep)
-    cat("\t", hop$destination_status)
+    cat("\t"%+%ifelse(hop$destination_status=="online",green(hop$destination_status), red(hop$destination_status)))
     if (hop$destination_status=="offline") sleep=0
     three_dots(sleep=sleep)
-    cat(green("\t"%+%ifelse(hop$enough_capacity,"has","no")%+%" capacity"))
+    cat("\t"%+%ifelse(hop$enough_capacity,green("has"),red("no"))%+%" capacity")
     new_line()
     from=hop$alias
     
