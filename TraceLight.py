@@ -21,7 +21,7 @@ class Tracer:
                     route_is_broken = True
                     continue
 
-                print '*** TESTING ***'
+                print '%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC)
                 print 'FROM: %-25s %s' % ("YOU", own_pub_key)
                 print 'TO  : %-25s %s' % (node.alias, node.pub_key)
 
@@ -35,6 +35,7 @@ class Tracer:
 
                 result = self.sendPayment(node.pub_key, amount)
 
+                color = bcolors.FAIL
                 if 'timeout' in result or 'UnknownNextPeer' in result:
                     result = "NODE IS OFFLINE"
                     route_is_broken = True
@@ -47,11 +48,11 @@ class Tracer:
                 elif "UnknownPaymentHash" in result:  # This means money went through
                     node.state = "ONLINE"
                     result = "SUCCESS"
-
+                    color = bcolors.OKGREEN
                 else:
                     result = "FUCK"
 
-                print 'RESULT: %s' % result
+                print 'RESULT: %s%s%s' % (color, result, bcolors.ENDC)
                 print '*********************************\n'
 
                 if result is not "SUCCESS":
