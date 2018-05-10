@@ -1,0 +1,374 @@
+{
+    "origin_pub": "0355438a4183b37bc523f5759dcfa49a844f828ddf6ce1a05862510f358d91a242", 
+    "origin_alias": "0355438a4183b37bc523", 
+    "routes": [
+        {
+            "route_id": 0, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1426132551929823233", 
+                    "destination_pub": "021374d478f70f28af62de1e2b29ef0ee3a88a6109964594f98c3dc8e2a4b7d7a2", 
+                    "destination_alias": "arcade.lightning\u26a1\ufe0f", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1416869166459846656", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 1, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1423834572626067456", 
+                    "destination_pub": "03a0df42e93655311fee911f857a5cf1c6415f395f6396bb5ac756cbc6f3532601", 
+                    "destination_alias": "DeutscheTestnetBank", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421981895534837760", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 2, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1421435438255964160", 
+                    "destination_pub": "03cc69575c7c22ec4a30a282f28a7e1cd3eb6fbfba9206738b65608092a6a5cb22", 
+                    "destination_alias": "CRYPTONYC", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1422077553045667840", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 3, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1421520100651958272", 
+                    "destination_pub": "02bbca52b1719110792b5dcbf50fd113a34ecb53e31980b6ec04f6ac32226b41a8", 
+                    "destination_alias": "MOONLIGHT", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1422139125694922753", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 4, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1425796101368250368", 
+                    "destination_pub": "02f82a1188bb4baa885de6c0d14276db056aa9da768de545c4fc7349379b5670cb", 
+                    "destination_alias": "London-Connect", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1425814793065725952", 
+                    "destination_pub": "03a0df42e93655311fee911f857a5cf1c6415f395f6396bb5ac756cbc6f3532601", 
+                    "destination_alias": "DeutscheTestnetBank", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421981895534837760", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 5, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1423834572626067456", 
+                    "destination_pub": "03a0df42e93655311fee911f857a5cf1c6415f395f6396bb5ac756cbc6f3532601", 
+                    "destination_alias": "DeutscheTestnetBank", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1423834572626132992", 
+                    "destination_pub": "02a666493fb01af708a1a63c494593549170bb1a7b5efc3e52e0a4b93a7079acee", 
+                    "destination_alias": "\u26a1 ECONOB.IT \u26a1", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1422010482838798336", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 6, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1421435438255964160", 
+                    "destination_pub": "03cc69575c7c22ec4a30a282f28a7e1cd3eb6fbfba9206738b65608092a6a5cb22", 
+                    "destination_alias": "CRYPTONYC", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1423895045765464064", 
+                    "destination_pub": "03a0df42e93655311fee911f857a5cf1c6415f395f6396bb5ac756cbc6f3532601", 
+                    "destination_alias": "DeutscheTestnetBank", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421981895534837760", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 7, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1424838426740588544", 
+                    "destination_pub": "02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a", 
+                    "destination_alias": "offerm@gmail.com", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1426070979272638465", 
+                    "destination_pub": "02ca22bc12c1c21901c284034d3caad5432f495d440e05a3fc96bfa54e09138d3d", 
+                    "destination_alias": "Sir Lightning", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1421308994423160833", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 8, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1424838426740588544", 
+                    "destination_pub": "02abcb7bcee19d1b2045222cd8f9b9d866e9e3d7ec1fa25a8b056d011b0ac10b5a", 
+                    "destination_alias": "offerm@gmail.com", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1424766958481965056", 
+                    "destination_pub": "023ea0a53af875580899da0ab0a21455d9c19160c4ea1b7774c9d4be6810b02d2c", 
+                    "destination_alias": "btctest.lnetwork.tokyo", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1425940137391554560", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }, 
+        {
+            "route_id": 9, 
+            "route_is_broken": false, 
+            "hops": [
+                {
+                    "chan_id": "1425668558029914112", 
+                    "destination_pub": "03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d", 
+                    "destination_alias": "GRIZ [LND]", 
+                    "destination_status": "ONLINE", 
+                    "enough_capacity": true
+                }, 
+                {
+                    "chan_id": "1426132551929823233", 
+                    "destination_pub": "021374d478f70f28af62de1e2b29ef0ee3a88a6109964594f98c3dc8e2a4b7d7a2", 
+                    "destination_alias": "arcade.lightning\u26a1\ufe0f", 
+                    "destination_status": "OFFLINE", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1426244702114807808", 
+                    "destination_pub": "02965d52c0888d3cf611a8ff6375cb1c7387a9039a61d3110e4a45e7916d2e8b9c", 
+                    "destination_alias": "Daphy", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1426244702114611200", 
+                    "destination_pub": "03e5f9d1935c67a029bf0a26af5f63109f4f4c45993a8f45177a8f2f39bcb46144", 
+                    "destination_alias": "IslandDSP", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }, 
+                {
+                    "chan_id": "1386952554579558400", 
+                    "destination_pub": "021dcd5ec6cc0a00b537ae919d8aed683e9f0cb9776d535d45cc3bee6bec714939", 
+                    "destination_alias": "htlc.me", 
+                    "destination_status": "UNKNOWN", 
+                    "enough_capacity": false
+                }
+            ]
+        }
+    ]
+}
