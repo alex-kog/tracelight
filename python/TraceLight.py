@@ -27,6 +27,7 @@ if __name__ == "__main__":
     parser.add_argument('-d', help='destination public key', dest='destination', default="")
     parser.add_argument('-a', help='amount', dest='amount', default="")
     parser.add_argument('-o', help='output', dest='output', default="output.json")
+    parser.add_argument('-m', help='max_routes', dest='max_routes', default=10)
     parser.add_argument('-q', action="store_true", help='quiet mode', dest='quiet')
     args = parser.parse_args()
 
@@ -34,5 +35,6 @@ if __name__ == "__main__":
     amount = args.amount
     output = args.output
     quiet = args.quiet
+    max_routes = int(args.max_routes)
 
-    TraceLight().run(dest, amount, 'output/%s' % output, quiet, 1)
+    TraceLight().run(dest, amount, 'output/%s' % output, quiet, max_routes)
