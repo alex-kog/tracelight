@@ -1,6 +1,12 @@
 library(jsonlite)
 library(crayon)
-outputFile=file("~/github/tracelight/tracelight/output/output_02f82a1188bb4baa885de6c0d14276db056aa9da768de545c4fc7349379b5670cb_1.json")
+print(args)
+if (length(args)==0) {
+  outputFile=file("~/github/tracelight/tracelight/output/output_02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490_400000.json")
+} else if (length(args)==2) {
+  outputFile=file(paste0("~/github/tracelight/tracelight/output/output_",args[1],"_",args[2],".json"))
+}
+outputFile=file("~/github/tracelight/tracelight/output/output_02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490_400001.json")
 output=fromJSON(outputFile,simplifyVector = F)
 routes=output$routes
 three_dots<-function(sleep=1){

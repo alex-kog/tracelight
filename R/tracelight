@@ -1,0 +1,3 @@
+echo "offer"
+Rscript ~/github/tracelight/tracelight/R/tracelight.R $1 $2
+
