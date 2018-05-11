@@ -18,14 +18,16 @@ library(jsonlite)
 library(dplyr)
 library(igraph)
 
-fileName=("~/github/tracelight/tracelight/output/output_02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490_400000.json")
+fileName=("/Users/yakirpaykey/traceligh/tracelight/output/output_02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490_400000.json")
 outputFile=file(fileName)
 routesJson=fromJSON(outputFile,simplifyVector = F)
+routes=routesJson$routes
 
-routes.df=fromJSON(routesJson,simplifyVector = T)[[1]]
-hops=routes.df$hops
-for (i in 1:length(hops)){
-  hops[[i]]$route=i
+for (i in 1:length(routes)){
+  from=routesJson$origin_alias
+  for  (j in 1:length(routes[[i]]hops){
+    
+  }
 }
 
 channels=do.call(rbind.data.frame, hops)
