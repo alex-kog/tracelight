@@ -36,4 +36,4 @@ if [ ${TYPE} = "FULL" ]; then
    python ./python/Tracelight.py -d ${DESTINATION} -a ${AMOUNT} -o ${OUTPUT} -m 10 #-q
 fi
 
-./R/tracelight ${OUTPUT}
+./R/tracelight ${DESTINATION} ${AMOUNT}
