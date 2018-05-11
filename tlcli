@@ -1,0 +1,39 @@
+#!/bin/bash
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    -d|--destination)
+    DESTINATION="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -a|--amount)
+    AMOUNT="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -t|--type)
+    TYPE="$2"
+    shift # past argument
+    shift # past value
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+OUTPUT="${DESTINATION}_${AMOUNT}.json"
+
+echo DESTINATION  = "${DESTINATION}"
+echo AMOUNT     = "${AMOUNT}"
+echo TYPE       = "${TYPE}"
+echo OUTPUT     = "${OUTPUT}"
+
+if [ ${TYPE} = "FULL" ]; then
+   python ./python/Tracelight.py -d ${DESTINATION} -a ${AMOUNT} -o ${OUTPUT} -q
+fi
+
+./R/tracerouteprint ${OUTPUT}

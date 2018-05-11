@@ -1,20 +1,26 @@
-from python.lncli_helper import bcolors, SendPaymentRunner
+from lncli_helper import bcolors, SendPaymentRunner
 
 
 class Tracer:
-    def __init__(self):
+    def __init__(self, max_routes, quiet_mode):
         self.payment_cache = {}
+        self.quiet_mode = quiet_mode
+        self.max_routes = max_routes
         pass
 
-    def trace(self, routes, amt, own_pub_key, max_routes):
+    def log(self, str):
+        if not self.quiet_mode:
+            print str
+
+    def trace(self, routes, amt, own_pub_key):
         offline_nodes = []
         no_capacity_nodes = []
 
         for index, route in enumerate(routes):
-            if index == max_routes:
+            if index == self.max_routes:
                 break
 
-            print '%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE, index, bcolors.ENDC)
+            self.log('%s\n\nCHECKING ROUTE #%s\n%s' % (bcolors.OKBLUE, index, bcolors.ENDC))
             route_is_broken = False
             minimal_capacity = False
             ordered_route_nodes = list(route.nodes(own_pub_key))[1:]
@@ -32,10 +38,10 @@ class Tracer:
                 channel = ordered_channels[index]
                 amount = 1 if minimal_capacity else amt
 
-                print '%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC)
-                print 'FROM: %-25s %s' % ("YOU", own_pub_key)
-                print 'TO  : %-25s %s' % (node.alias, node.pub_key)
-                print 'AMOUNT: %s' % amount
+                self.log('%s*** TESTING ***%s' % (bcolors.WARNING, bcolors.ENDC))
+                self.log('FROM: %-25s %s' % ("YOU", own_pub_key))
+                self.log('TO  : %-25s %s' % (node.alias, node.pub_key))
+                self.log('AMOUNT: %s' % amount)
 
                 if node in offline_nodes:
                     result = "timeout"
@@ -74,11 +80,13 @@ class Tracer:
                 else:
                     status = "FUCK"
 
-                print 'RESULT: %s%s%s %s\n' % \
-                      (color, status, bcolors.ENDC, "" if result == "" else '(%s)' % result)
+                self.log('RESULT: %s%s%s %s\n' % \
+                      (color, status, bcolors.ENDC, "" if result == "" else '(%s)' % result))
 
                 if should_break:
                     break
+
+
 
     def sendPayment(self, pubkey, amount):
         if (pubkey, amount) in self.payment_cache.keys():

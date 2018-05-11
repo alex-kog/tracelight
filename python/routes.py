@@ -1,8 +1,6 @@
-import json
-
 from gyp.common import OrderedSet
 
-from python.lncli_helper import GetChannelInfoRunner, GetNodeInfoRunner, QueryRoutesRunner
+from lncli_helper import GetChannelInfoRunner, GetNodeInfoRunner, QueryRoutesRunner
 
 
 class Route:
