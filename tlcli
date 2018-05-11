@@ -27,10 +27,10 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 OUTPUT="${DESTINATION}_${AMOUNT}.json"
 
-echo DESTINATION  = "${DESTINATION}"
-echo AMOUNT     = "${AMOUNT}"
-echo TYPE       = "${TYPE}"
-echo OUTPUT     = "${OUTPUT}"
+#echo DESTINATION  = "${DESTINATION}"
+#echo AMOUNT     = "${AMOUNT}"
+#echo TYPE       = "${TYPE}"
+#echo OUTPUT     = "${OUTPUT}"
 
 if [ ${TYPE} = "FULL" ]; then
    python ./python/Tracelight.py -d ${DESTINATION} -a ${AMOUNT} -o ${OUTPUT} -m 10 #-q
