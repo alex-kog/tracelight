@@ -1,3 +1,19 @@
+# This file is part of TraceLight.
+#
+# TraceLight is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# TraceLight is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Toasty.  If not, see <http://www.gnu.org/licenses/>.
+
+
 from lncli_helper import bcolors, SendPaymentRunner
 
 
@@ -81,12 +97,10 @@ class Tracer:
                     status = "FUCK"
 
                 self.log('RESULT: %s%s%s %s\n' % \
-                      (color, status, bcolors.ENDC, "" if result == "" else '(%s)' % result))
+                         (color, status, bcolors.ENDC, "" if result == "" else '(%s)' % result))
 
                 if should_break:
                     break
-
-
 
     def sendPayment(self, pubkey, amount):
         if (pubkey, amount) in self.payment_cache.keys():
