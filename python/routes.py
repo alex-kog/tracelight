@@ -2,6 +2,8 @@ import json
 
 from gyp.common import OrderedSet
 
+from python.lncli_helper import GetChannelInfoRunner, GetNodeInfoRunner, QueryRoutesRunner
+
 
 class Route:
     def __init__(self):
@@ -22,35 +24,6 @@ class Route:
             h.decode(channel)
             hops.append(h)
         return hops
-
-    def populateChannelInfo(self, channelInfoRunner, nodeInfoRunner):
-        for channel in self.channels:
-            with open('temp_channel_info.json', "w") as outfile:
-                channelInfoRunner.run(channel.chan_id, outfile)
-                outfile.close()
-
-            with open('temp_channel_info.json') as data_file:
-                data = json.load(data_file)
-                channel.populateChannelInfo(data)
-                data_file.close()
-
-            with open('temp_node_info.json', "w") as outfile:
-                nodeInfoRunner.run(channel.node1.pub_key, outfile)
-                outfile.close()
-
-            with open('temp_node_info.json') as data_file:
-                data = json.load(data_file)
-                channel.node1.alias = data['node']['alias']
-                data_file.close()
-
-            with open('temp_node_info.json', "w") as outfile:
-                nodeInfoRunner.run(channel.node2.pub_key, outfile)
-                outfile.close()
-
-            with open('temp_node_info.json') as data_file:
-                data = json.load(data_file)
-                channel.node2.alias = data['node']['alias']
-                data_file.close()
 
     def nodes(self, own_pub_key):
         nodes = OrderedSet([])
@@ -84,11 +57,6 @@ class Channel:
     def decode(self, json):
         self.chan_id = json['chan_id']
 
-    def populateChannelInfo(self, data):
-        self.node1.pub_key = data['node1_pub']
-        self.node2.pub_key = data['node2_pub']
-        self.capacity = data['capacity']
-
     def __str__(self):
         return 'id: %s, capacity %s, node1: %s, node2: %s ' \
                % (self.chan_id,  self.capacity, self.node1, self.node2)
@@ -112,14 +80,37 @@ class Node:
         return hash(('pub_key', self.pub_key))
 
 
+class RoutesFetcher:
+    def __init__(self):
+        pass
+
+    def routes(self, dest):
+        routes = QueryRoutesParser().parse(QueryRoutesRunner().result(dest, 1))
+        for route in routes:
+            self.populateChannelInfo(route, GetChannelInfoRunner(), GetNodeInfoRunner())
+
+        return routes
+
+    def populateChannelInfo(self, route, channelInfoRunner, nodeInfoRunner):
+        for channel in route.channels:
+            data = channelInfoRunner.result(channel)
+
+            channel.node1.pub_key = data['node1_pub']
+            channel.node2.pub_key = data['node2_pub']
+            channel.capacity = data['capacity']
+
+            data = nodeInfoRunner.result(channel.node1.pub_key)
+            channel.node1.alias = data['node']['alias']
+
+            data = nodeInfoRunner.result(channel.node2.pub_key)
+            channel.node2.alias = data['node']['alias']
+
+
 class QueryRoutesParser:
     def __init__(self):
         pass
 
-    def parse(self, json_file):
-        with open(json_file) as data_file:
-            data = json.load(data_file)
-
+    def parse(self, data):
         routes = []
         for route in data['routes']:
             r = Route()

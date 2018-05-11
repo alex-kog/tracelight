@@ -1,4 +1,6 @@
+import json
 import subprocess
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -9,6 +11,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 def runCommand(args, stdout=subprocess.PIPE):
     exitOnError = True
@@ -30,6 +33,13 @@ def runCommand(args, stdout=subprocess.PIPE):
         raise
 
 
+def jsonData(filename):
+    with open(filename) as data_file:
+        data = json.load(data_file)
+        data_file.close()
+    return data
+
+
 class GetInfoRunner:
     def __init__(self):
         pass
@@ -37,6 +47,13 @@ class GetInfoRunner:
     def run(self, stdout=subprocess.PIPE):
         args = ["lncli", "getinfo"]
         return runCommand(args, stdout)
+
+    def result(self):
+        with open('temp.json', "w") as outfile:
+            self.run(outfile)
+            outfile.close()
+
+        return jsonData('temp.json')
 
 
 class SendPaymentRunner:
@@ -52,6 +69,13 @@ class SendPaymentRunner:
 
         return runCommand(args, stdout)
 
+    def result(self, pubkey, amt):
+        with open('temp.json', "w") as outfile:
+            self.run(pubkey, amt, outfile)
+            outfile.close()
+
+        return jsonData('temp.json')
+
 
 class GetChannelInfoRunner:
     def __init__(self):
@@ -61,20 +85,41 @@ class GetChannelInfoRunner:
         args = ["lncli", "getchaninfo", "{}".format(channel)]
         return runCommand(args, stdout)
 
+    def result(self, channel):
+        with open('temp.json', "w") as outfile:
+            self.run(channel.chan_id, outfile)
+            outfile.close()
+
+        return jsonData('temp.json')
+
 
 class GetNodeInfoRunner:
     def __init__(self):
         pass
 
-    def run(self, channel, stdout=subprocess.PIPE):
-        args = ["lncli", "getnodeinfo", "{}".format(channel)]
+    def run(self, pub_key, stdout=subprocess.PIPE):
+        args = ["lncli", "getnodeinfo", "{}".format(pub_key)]
         return runCommand(args, stdout)
+
+    def result(self, pub_key):
+        with open('temp.json', "w") as outfile:
+            self.run(pub_key, outfile)
+            outfile.close()
+
+        return jsonData('temp.json')
 
 
 class QueryRoutesRunner:
-    def __init__(self, ):
+    def __init__(self):
         pass
 
     def run(self, pubkey, amount, stdout=subprocess.PIPE):
         args = ["lncli", "queryroutes", "{}".format(pubkey), "{}".format(amount)]
         return runCommand(args, stdout)
+
+    def result(self, pubkey, amount):
+        with open('temp.json', "w") as outfile:
+            self.run(pubkey, amount, outfile)
+            outfile.close()
+
+        return jsonData('temp.json')
