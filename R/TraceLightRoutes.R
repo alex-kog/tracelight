@@ -17,18 +17,11 @@
 library(jsonlite)
 library(dplyr)
 library(igraph)
-TargetNode="03d3f875b88f083dd4d1d5af4bcd5483d7bf0303ec1f585879e2a1012961ec9a9d"
-Capacity=1
-myinfo=system("~/gocode/bin/lncli getinfo",intern = T)
-myinfo.df=fromJSON(myinfo,simplifyVector = T)
-my_pub=myinfo.df$identity_pubkey
 
-graphJson=system(paste("~/gocode/bin/lncli describegraph"),intern = T)
-graphJson.df=fromJSON(graphJson,simplifyVector = T)
-edges.df=graphJson.df$edges[,c(1,3,4,5)]
-nodes.df=graphJson.df$nodes
+fileName=("~/github/tracelight/tracelight/output/output_02c8b565720eaa9c3819b7020c4ee7c084cb9f7a6cd347b006eae5e5698df9f490_400000.json")
+outputFile=file(fileName)
+routesJson=fromJSON(outputFile,simplifyVector = F)
 
-routesJson=system(paste("~/gocode/bin/lncli queryroutes",TargetNode,Capacity),intern = T)
 routes.df=fromJSON(routesJson,simplifyVector = T)[[1]]
 hops=routes.df$hops
 for (i in 1:length(hops)){
